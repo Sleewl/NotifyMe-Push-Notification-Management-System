@@ -13,7 +13,8 @@
    
 
 **Sequence-диаграмма:**
-<img width="2170" height="1508" alt="SS" src="https://github.com/user-attachments/assets/d65db8e4-dcd1-42f9-a3e0-5ea2040263fe" />
+<img width="2321" height="1359" alt="исправлено" src="https://github.com/user-attachments/assets/c4ba1240-cb6d-4284-bdde-92247fead3c2" />
+
 
 **Class-диаграмма:**
 <img width="1498" height="810" alt="CC" src="https://github.com/user-attachments/assets/96d904ce-30bf-47a0-9fd9-52e4b9af643c" />
