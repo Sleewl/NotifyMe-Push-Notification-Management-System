@@ -5,6 +5,7 @@ Notification::Notification()
   : id(0), sourceId(0), creationTime(std::chrono::system_clock::now()),
   status(NotificationStatus::REJECTED),
   enterBufferTime(std::chrono::system_clock::time_point::min()),
+  leaveBufferTime(std::chrono::system_clock::time_point::min()),
   enterChannelTime(std::chrono::system_clock::time_point::min()) {
 }
 
@@ -12,21 +13,22 @@ Notification::Notification(int id, int sourceId)
   : id(id), sourceId(sourceId), creationTime(std::chrono::system_clock::now()),
   status(NotificationStatus::CREATED),
   enterBufferTime(std::chrono::system_clock::time_point::min()),
+  leaveBufferTime(std::chrono::system_clock::time_point::min()),
   enterChannelTime(std::chrono::system_clock::time_point::min()) {
 }
 
 int Notification::getId() const { return id; }
 int Notification::getSourceId() const { return sourceId; }
-std::chrono::system_clock::time_point Notification::getCreationTime() const { return creationTime; }
 NotificationStatus Notification::getStatus() const { return status; }
 void Notification::setStatus(NotificationStatus newStatus) { status = newStatus; }
 
 void Notification::setEnterBufferTime() { enterBufferTime = std::chrono::system_clock::now(); }
+void Notification::setLeaveBufferTime() { leaveBufferTime = std::chrono::system_clock::now(); } // Новое
 void Notification::setEnterChannelTime() { enterChannelTime = std::chrono::system_clock::now(); }
 
 double Notification::getWaitTime() const {
-  if (enterBufferTime.time_since_epoch().count() != 0 && enterChannelTime.time_since_epoch().count() != 0) {
-    return std::chrono::duration_cast<std::chrono::milliseconds>(enterChannelTime - enterBufferTime).count() / 1000.0;
+  if (enterBufferTime.time_since_epoch().count() != 0 && leaveBufferTime.time_since_epoch().count() != 0) {
+    return std::chrono::duration_cast<std::chrono::milliseconds>(leaveBufferTime - enterBufferTime).count() / 1000.0;
   }
   return 0.0;
 }

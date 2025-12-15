@@ -2,10 +2,9 @@
 #ifndef SOURCE_H
 #define SOURCE_H
 
-#include "Notification.h" // Для возврата Notification
+#include "Notification.h"
 #include <random>
 
-// Класс Источника (ИБ - Бесконечный)
 class Source {
 private:
   int id;
@@ -24,7 +23,7 @@ public:
   Notification generateNotification();
 
   int getId() const;
-  int getGeneratedCount() const;
+  int getGeneratedCount() const; // Для статистики n_gen
 };
 
 #endif // SOURCE_H

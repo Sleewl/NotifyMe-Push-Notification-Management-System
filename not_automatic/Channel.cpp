@@ -1,6 +1,6 @@
 // Channel.cpp
 #include "Channel.h"
-#include <stdexcept>
+#include <stdexcept> // Для throw
 
 Channel::Channel(int id, int priority, double minTime, double maxTime)
   : id(id), priority(priority), isBusy(false), serviceTimeMin(minTime), serviceTimeMax(maxTime),
@@ -18,12 +18,11 @@ double Channel::startProcessing(Notification notification) {
 
   isBusy = true;
   currentNotification = notification;
-  currentNotification.setEnterChannelTime();
+  currentNotification.setEnterChannelTime(); // Устанавливаем время входа в канал
   currentNotification.setStatus(NotificationStatus::PROCESSING);
 
-
-  double serviceTime = uniformDist(rng);
-  return serviceTime;
+  // Генерируем время обслуживания (П32 - равномерное)
+  return uniformDist(rng);
 }
 
 void Channel::freeChannel() {

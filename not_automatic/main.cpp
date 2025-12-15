@@ -4,11 +4,11 @@
 #include <exception>
 
 int main() {
-  setlocale(LC_ALL, "Ru");
   try {
+    // Создаем систему с 3 источниками, буфером на 5, 3 каналами
+    PushNotificationSystem system(3, 5, 3, 20); // Ограничиваем для демонстрации
 
-    PushNotificationSystem system(3, 5, 3, 20);
-
+    // Запускаем пошаговую симуляцию
     system.runStepByStep();
   }
   catch (const std::exception& e) {

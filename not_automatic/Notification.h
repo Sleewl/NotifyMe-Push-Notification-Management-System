@@ -6,7 +6,6 @@
 #include <chrono>
 #include <string>
 
-
 class Notification {
 private:
   int id;
@@ -14,27 +13,30 @@ private:
   std::chrono::system_clock::time_point creationTime;
   NotificationStatus status;
   std::chrono::system_clock::time_point enterBufferTime;
-  std::chrono::system_clock::time_point enterChannelTime;
+  std::chrono::system_clock::time_point leaveBufferTime; // Время выхода из буфера (вход в канал)
+  std::chrono::system_clock::time_point enterChannelTime; // Время входа в канал (конец обслуживания)
 
 public:
-  Notification();
-
+  Notification(); // Для инициализации буфера
   Notification(int id, int sourceId);
 
   int getId() const;
   int getSourceId() const;
-  std::chrono::system_clock::time_point getCreationTime() const;
   NotificationStatus getStatus() const;
   void setStatus(NotificationStatus newStatus);
 
-
   void setEnterBufferTime();
+  void setLeaveBufferTime(); // Новое
   void setEnterChannelTime();
 
+  // Время в буфере (T_ожидания)
   double getWaitTime() const;
-  double getSystemTime() const; 
+  // Время в канале (T_обслуживания) - приблизительно, рассчитывается при завершении
+  // double getServiceTime() const; // Не хранится, передаётся из Channel
+  // Время в системе (T_пребывания)
+  double getSystemTime() const;
 
   std::string getStatusString() const;
 };
 
-#endif 
+#endif // NOTIFICATION_H
